@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Dr. Prasenjit Saha – Dental Care</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cream: #faf7f2;
+    --ivory: #f2ede4;
+    --sage: #8aab94;
+    --deep-sage: #4a7a5a;
+    --charcoal: #2c2c2c;
+    --muted: #7a7268;
+    --accent: #c8a97a;
+    --white: #ffffff;
+    --border: #e0d9cf;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--charcoal);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  [contenteditable="true"] {
+    outline: none;
+    border-radius: 3px;
+    transition: background 0.2s, box-shadow 0.2s;
+    cursor: text;
+  }
+  [contenteditable="true"]:hover {
+    background: rgba(200,169,122,0.10);
+    box-shadow: 0 0 0 2px rgba(200,169,122,0.3);
+  }
+  [contenteditable="true"]:focus {
+    background: rgba(200,169,122,0.15);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+
+  /* EDIT BANNER */
+  #edit-banner {
+    background: var(--deep-sage);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  #edit-banner span { opacity: 0.9; }
+  #toggle-edit {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s;
+  }
+  #toggle-edit:hover { opacity: 0.85; }
+
+  /* NAV */
+  nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 20px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 12px rgba(0,0,0,0.04);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .logo-icon {
+    width: 40px; height: 40px;
+    background: var(--deep-sage);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .logo-text h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1.2;
+  }
+  .logo-text p {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    font-weight: 500;
+  }
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 36px;
+    align-items: center;
+  }
+  nav ul a {
+    text-decoration: none;
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    transition: color 0.2s;
+  }
+  nav ul a:hover { color: var(--deep-sage); }
+  .nav-cta {
+    background: var(--deep-sage) !important;
+    color: white !important;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 500 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.5px !important;
+  }
+  .nav-cta:hover { opacity: 0.88; }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88vh;
+    overflow: hidden;
+  }
+  .hero-left {
+    background: var(--ivory);
+    padding: 100px 80px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    top: -60px; left: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(138,171,148,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(138,171,148,0.18);
+    color: var(--deep-sage);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+  .hero-tag::before { content: '✦'; font-size: 10px; }
+  .hero-left h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(38px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1.15;
+    color: var(--charcoal);
+    margin-bottom: 22px;
+  }
+  .hero-left h2 em {
+    font-style: italic;
+    color: var(--deep-sage);
+  }
+  .hero-desc {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+    max-width: 400px;
+    margin-bottom: 44px;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+  .btn-primary {
+    background: var(--deep-sage);
+    color: white;
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(74,122,90,0.3); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--charcoal);
+    padding: 14px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    border: 1.5px solid var(--border);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--deep-sage); color: var(--deep-sage); }
+
+  .hero-stats {
+    display: flex;
+    gap: 40px;
+  }
+  .stat-item { text-align: left; }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--charcoal);
+    line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-top: 4px;
+  }
+
+  .hero-right {
+    background: var(--sage);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, rgba(74,122,90,0.6) 0%, rgba(138,171,148,0.3) 100%);
+  }
+  .hero-photo-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    z-index: 1;
+    padding-bottom: 60px;
+  }
+  .doctor-silhouette {
+    font-size: 120px;
+    opacity: 0.85;
+    filter: drop-shadow(0 8px 32px rgba(0,0,0,0.2));
+  }
+  .photo-hint {
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(8px);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    border: 1px solid rgba(255,255,255,0.3);
+  }
+  .hero-card {
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    background: white;
+    border-radius: 16px;
+    padding: 18px 22px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+    z-index: 2;
+    min-width: 200px;
+  }
+  .hero-card .card-top {
+    display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+  }
+  .card-avatar {
+    width: 36px; height: 36px;
+    background: var(--sage);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .hero-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px; font-weight: 600; line-height: 1.2;
+  }
+  .hero-card p { font-size: 11px; color: var(--muted); }
+  .rating { display: flex; align-items: center; gap: 4px; font-size: 12px; color: var(--accent); margin-top: 4px; }
+  .rating span { color: var(--charcoal); font-weight: 500; }
+
+  /* SERVICES */
+  section { padding: 100px 80px; }
+  .section-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 14px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 3vw, 42px);
+    font-weight: 600;
+    color: var(--charcoal);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .section-sub {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 500px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+  }
+
+  #services { background: var(--white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .service-card {
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 36px 30px;
+    border: 1px solid var(--border);
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sage), var(--deep-sage));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(0,0,0,0.08); }
+  .service-card:hover::before { opacity: 1; }
+  .service-icon { font-size: 36px; margin-bottom: 18px; display: block; }
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--charcoal);
+  }
+  .service-card p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+
+  /* ABOUT */
+  #about { background: var(--ivory); }
+  .about-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-img-wrap {
+    position: relative;
+  }
+  .about-photo-box {
+    background: var(--sage);
+    border-radius: 24px;
+    height: 520px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 90px;
+    position: relative;
+    overflow: hidden;
+  }
+  .about-photo-box::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, rgba(74,122,90,0.4), transparent 60%);
+  }
+  .about-badge {
+    position: absolute;
+    bottom: -20px; right: -20px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    width: 110px; height: 110px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(200,169,122,0.4);
+  }
+  .about-badge .big { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; line-height: 1; }
+  .about-badge .sm { font-size: 10px; letter-spacing: 0.5px; text-transform: uppercase; margin-top: 4px; }
+  .about-content { padding-right: 20px; }
+  .about-content p {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .credentials {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 36px;
+  }
+  .cred-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 20px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+  }
+  .cred-dot {
+    width: 8px; height: 8px;
+    background: var(--sage);
+    border-radius: 50%;
+    margin-top: 6px;
+    flex-shrink: 0;
+  }
+  .cred-item h4 { font-size: 14px; font-weight: 500; color: var(--charcoal); margin-bottom: 2px; }
+  .cred-item p { font-size: 12px; color: var(--muted); }
+
+  /* TESTIMONIALS */
+  #testimonials { background: var(--deep-sage); }
+  #testimonials .section-label { color: rgba(255,255,255,0.6); }
+  #testimonials .section-title { color: white; }
+  #testimonials .section-sub { color: rgba(255,255,255,0.65); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .testimonial-card {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 32px 28px;
+    backdrop-filter: blur(8px);
+    transition: transform 0.25s;
+  }
+  .testimonial-card:hover { transform: translateY(-3px); }
+  .quote-icon { font-size: 32px; color: rgba(255,255,255,0.3); margin-bottom: 16px; line-height: 1; }
+  .testimonial-card p { color: rgba(255,255,255,0.85); font-size: 14px; line-height: 1.75; margin-bottom: 24px; }
+  .reviewer { display: flex; align-items: center; gap: 12px; }
+  .reviewer-avatar {
+    width: 40px; height: 40px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+  }
+  .reviewer-name { font-size: 14px; font-weight: 500; color: white; }
+  .reviewer-stars { font-size: 11px; color: var(--accent); margin-top: 2px; }
+
+  /* CONTACT */
+  #contact { background: var(--cream); }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .contact-info { display: flex; flex-direction: column; gap: 24px; margin-top: 10px; }
+  .info-item {
+    display: flex; gap: 16px; align-items: flex-start;
+    padding: 20px;
+    background: var(--white);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+  }
+  .info-icon {
+    width: 44px; height: 44px;
+    background: var(--ivory);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+  .info-item h4 { font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 4px; font-weight: 500; }
+  .info-item p { font-size: 15px; color: var(--charcoal); font-weight: 400; }
+
+  .contact-form {
+    background: var(--white);
+    border-radius: 24px;
+    padding: 44px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+  }
+  .contact-form h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 28px;
+    color: var(--charcoal);
+  }
+  .form-group { margin-bottom: 18px; }
+  .form-group label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 500; letter-spacing: 0.3px; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--charcoal);
+    background: var(--cream);
+    transition: border-color 0.2s;
+    outline: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--sage); }
+  .form-group textarea { resize: vertical; min-height: 100px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .submit-btn {
+    width: 100%;
+    background: var(--deep-sage);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: opacity 0.2s, transform 0.2s;
+    letter-spacing: 0.3px;
+  }
+  .submit-btn:hover { opacity: 0.88; transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer {
+    background: var(--charcoal);
+    color: rgba(255,255,255,0.5);
+    padding: 40px 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+  }
+  footer .foot-brand {
+    font-family: 'Playfair Display', serif;
+    color: rgba(255,255,255,0.85);
+    font-size: 16px;
+  }
+  footer p { margin-top: 4px; }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-left > * { animation: fadeUp 0.6s ease both; }
+  .hero-left > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-left > *:nth-child(2) { animation-delay: 0.2s; }
+  .hero-left > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-left > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-left > *:nth-child(5) { animation-delay: 0.5s; }
+
+  @media (max-width: 900px) {
+    nav { padding: 16px 24px; }
+    nav ul { display: none; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { height: 320px; }
+    .hero-left { padding: 60px 32px; }
+    section { padding: 70px 32px; }
+    .services-grid, .testimonials-grid { grid-template-columns: 1fr; }
+    .about-inner, .contact-inner { grid-template-columns: 1fr; }
+    footer { flex-direction: column; gap: 12px; text-align: center; padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="logo">
+    <div class="logo-icon">🦷</div>
+    <div class="logo-text">
+      <h1 contenteditable="true">Dr. Prasenjit Saha</h1>
+      <p contenteditable="true">DDS · Family & Cosmetic Dentistry</p>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#contact" class="nav-cta">Book Appointment</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-tag" contenteditable="true">Accepting New Patients</div>
+    <h2 contenteditable="true">Your <em>Smile</em> Deserves Expert Care</h2>
+    <p class="hero-desc" contenteditable="true">Compassionate, modern dental care for the whole family. We combine the latest technology with a gentle, personal touch so every visit feels comfortable and stress-free.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary" contenteditable="true">Book an Appointment</a>
+      <a href="#services" class="btn-secondary" contenteditable="true">View Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <span class="stat-num" contenteditable="true">15+</span>
+        <div class="stat-label" contenteditable="true">Years Experience</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" contenteditable="true">4,800+</span>
+        <div class="stat-label" contenteditable="true">Happy Patients</div>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num" contenteditable="true">5★</span>
+        <div class="stat-label" contenteditable="true">Google Rating</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-photo-placeholder">
+      <div class="doctor-silhouette">👩‍⚕️</div>
+      <div class="photo-hint">Replace with doctor photo</div>
+    </div>
+    <div class="hero-card">
+      <div class="card-top">
+        <div class="card-avatar">🦷</div>
+        <div>
+          <h4 contenteditable="true">Dr. Prasenjit Saha</h4>
+          <p contenteditable="true">DDS, FAGD</p>
+        </div>
+      </div>
+      <div class="rating">★★★★★ <span contenteditable="true">5.0 · 320 reviews</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services">
+  <div class="section-label" contenteditable="true">What We Offer</div>
+  <h2 class="section-title" contenteditable="true">Comprehensive Dental Services</h2>
+  <p class="section-sub" contenteditable="true">From routine cleanings to full smile makeovers, we offer everything your family needs under one roof.</p>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <span class="service-icon">🪥</span>
+      <h3 contenteditable="true">General Dentistry</h3>
+      <p contenteditable="true">Routine exams, cleanings, fillings, and preventive care to keep your teeth healthy for life. We recommend check-ups every six months.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">✨</span>
+      <h3 contenteditable="true">Cosmetic Dentistry</h3>
+      <p contenteditable="true">Teeth whitening, porcelain veneers, bonding, and smile makeovers designed to give you the confidence to show off your smile.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🦷</span>
+      <h3 contenteditable="true">Dental Implants</h3>
+      <p contenteditable="true">Permanent tooth replacement solutions that look, feel, and function just like natural teeth, restoring your smile and oral health.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">😁</span>
+      <h3 contenteditable="true">Orthodontics</h3>
+      <p contenteditable="true">Clear aligners and traditional braces for teens and adults. Straighten your teeth comfortably and discreetly at any age.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🧒</span>
+      <h3 contenteditable="true">Pediatric Dentistry</h3>
+      <p contenteditable="true">Gentle, fun dental care for children of all ages. We make first visits a positive experience to set a lifelong foundation for oral health.</p>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🚨</span>
+      <h3 contenteditable="true">Emergency Dental Care</h3>
+      <p contenteditable="true">Tooth pain can't wait. We offer same-day emergency appointments for urgent dental issues including cracked teeth and severe pain.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- About -->
+<section id="about">
+  <div class="about-inner">
+    <div class="about-img-wrap">
+      <div class="about-photo-box">👩‍⚕️</div>
+      <div class="about-badge">
+        <span class="big" contenteditable="true">15+</span>
+        <span class="sm" contenteditable="true">Years of Care</span>
+      </div>
+    </div>
+    <div class="about-content">
+      <div class="section-label" contenteditable="true">Meet the Doctor</div>
+      <h2 class="section-title" contenteditable="true">Dr. Prasenjit Saha, DDS</h2>
+      <p contenteditable="true">I've been serving this community for over 15 years and believe that great dental care begins with listening. Every patient is unique, and your treatment plan should reflect your individual goals and concerns.</p>
+      <p contenteditable="true">My practice blends evidence-based techniques with the latest dental technology to deliver outcomes that are not only beautiful, but built to last. I'm committed to making your visit as comfortable and stress-free as possible.</p>
+      <div class="credentials">
+        <div class="cred-item">
+          <div class="cred-dot"></div>
+          <div>
+            <h4 contenteditable="true">Doctor of Dental Surgery (DDS)</h4>
+            <p contenteditable="true">University of California, San Francisco School of Dentistry, 2009</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-dot"></div>
+          <div>
+            <h4 contenteditable="true">Fellow, Academy of General Dentistry (FAGD)</h4>
+            <p contenteditable="true">Committed to continuing education and best practices</p>
+          </div>
+        </div>
+        <div class="cred-item">
+          <div class="cred-dot"></div>
+          <div>
+            <h4 contenteditable="true">Member, American Dental Association</h4>
+            <p contenteditable="true">Upholding the highest standards of dental ethics and care</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section id="testimonials">
+  <div class="section-label" contenteditable="true">Patient Stories</div>
+  <h2 class="section-title" contenteditable="true">What Our Patients Say</h2>
+  <p class="section-sub" contenteditable="true">We measure our success by the smiles we create and the trust our community places in us.</p>
+  <div class="testimonials-grid">
+
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <p contenteditable="true">Dr. Saha is the best dentist I've ever had. He's incredibly patient, explains everything clearly, and my teeth have never looked better. I actually look forward to my appointments now!</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">😊</div>
+        <div>
+          <div class="reviewer-name" contenteditable="true">Jennifer R.</div>
+          <div class="reviewer-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <p contenteditable="true">I used to have severe dental anxiety but the whole team here changed that for me. They're so gentle and understanding. My smile transformation has been truly life-changing.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">🙂</div>
+        <div>
+          <div class="reviewer-name" contenteditable="true">Marcus T.</div>
+          <div class="reviewer-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="testimonial-card">
+      <div class="quote-icon">"</div>
+      <p contenteditable="true">Brought my 7-year-old daughter in for her first visit and she left saying she wants to be a dentist one day! The staff made her feel so comfortable and excited about her teeth.</p>
+      <div class="reviewer">
+        <div class="reviewer-avatar">👩</div>
+        <div>
+          <div class="reviewer-name" contenteditable="true">Patricia L.</div>
+          <div class="reviewer-stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-inner">
+    <div>
+      <div class="section-label" contenteditable="true">Get in Touch</div>
+      <h2 class="section-title" contenteditable="true">Book Your Appointment</h2>
+      <p class="section-sub" contenteditable="true">Ready for a healthier, more confident smile? Contact us today to schedule your visit. New patients are always welcome.</p>
+      <div class="contact-info">
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <h4>Address</h4>
+            <p contenteditable="true">1234 Maple Street, Suite 200<br>San Francisco, CA 94102</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <h4>Phone</h4>
+            <p contenteditable="true">(415) 555-0192</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <h4>Office Hours</h4>
+            <p contenteditable="true">Mon–Fri: 8:00 AM – 6:00 PM<br>Saturday: 9:00 AM – 2:00 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h3 contenteditable="true">Request an Appointment</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane"/>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Doe"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input type="email" placeholder="jane@email.com"/>
+      </div>
+      <div class="form-group">
+        <label>Phone Number</label>
+        <input type="tel" placeholder="(415) 555-0000"/>
+      </div>
+      <div class="form-group">
+        <label>Service Needed</label>
+        <select>
+          <option>General Check-up & Cleaning</option>
+          <option>Cosmetic Consultation</option>
+          <option>Dental Implant Consultation</option>
+          <option>Orthodontics / Aligners</option>
+          <option>Emergency Visit</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message (optional)</label>
+        <textarea placeholder="Any concerns or questions for the doctor?"></textarea>
+      </div>
+      <button class="submit-btn" onclick="alert('Thank you! We\'ll be in touch shortly to confirm your appointment.')">Request Appointment →</button>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div>
+    <div class="foot-brand" contenteditable="true">Dr. Prasenjit Saha, DDS</div>
+    <p contenteditable="true">© 2025 · Family & Cosmetic Dentistry · San Francisco, CA</p>
+  </div>
+  <p contenteditable="true">Designed with care for our community 🦷</p>
+</footer>
+
+<script>
+  let editingEnabled = false;
+
+  // Disable contenteditable on load since the edit banner is removed
+  const els = document.querySelectorAll('[contenteditable]');
+  els.forEach(el => {
+    el.contentEditable = 'false';
+  });
+
+  // Smooth scrolling
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
